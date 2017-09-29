@@ -36,7 +36,7 @@ def find_pet_by_name(hash, pet_name)
   for pet in hash[:pets]
     if pet[:name] == pet_name
       pets = Hash.new
-      pets[:name] = pet_name
+      pets = pet
     end
   end
   return pets
@@ -64,4 +64,17 @@ end
 
 def customer_can_afford_pet(customer, pet)
   customer[:cash] > pet[:price]
+end
+
+def sell_pet_to_customer(pet_shop, pet, customer)
+  if pet != nil
+    pet_name = pet[:name]
+    if customer_can_afford_pet(customer, pet)
+      add_pet_to_customer(customer, pet)
+      add_or_remove_cash(pet_shop, pet[:price])
+      customer[:cash] -= pet[:price]
+      increase_pets_sold(pet_shop, 1)
+      remove_pet_by_name(pet_shop, pet_name)
+    end
+  end
 end
