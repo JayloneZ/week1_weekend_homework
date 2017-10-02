@@ -35,11 +35,10 @@ end
 def find_pet_by_name(hash, pet_name)
   for pet in hash[:pets]
     if pet[:name] == pet_name
-      pets = Hash.new
-      pets = pet
+      return pet
     end
   end
-  return pets
+  return nil
 end
 
 def remove_pet_by_name(hash, pet_name)
